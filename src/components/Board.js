@@ -4,8 +4,10 @@ import Square from './Square'
 
 export default class Board extends React.Component {
   renderSquare(i) {
-    return <Square key={i+100} value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />
+    return <Square winstatus={this.props.winlist.includes(i) ? "win" : "idle"} value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />
   }
+
+  
 
   render() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -15,7 +17,7 @@ export default class Board extends React.Component {
         <>{this.renderSquare(i)}</>
       )
       if (i % 3 === 2) {
-        acc.push(<div className="board-row" key={i}>{rowCont}</div>)
+        acc.push(<div className="board-row">{rowCont}</div>)
         rowCont = []
       }
       return acc
